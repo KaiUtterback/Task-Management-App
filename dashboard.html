@@ -44,45 +44,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="scripts.js"></script>
-    <script>
-        function renderTasks() {
-            const tasks = loadTasks();
-            const taskContainer = document.getElementById('taskContainer');
-            taskContainer.innerHTML = ''; // Clear existing tasks
-
-            tasks.forEach(task => {
-                const taskCard = document.createElement('div');
-                taskCard.className = 'col-md-4 mb-4';
-                taskCard.innerHTML = `
-                    <div class="card text-center bg-warning dashboard-card" data-task-id="${task.id}">
-                        <div class="card-body">
-                            <h5 class="card-title">${task.title}</h5>
-                            <p class="card-text">${task.description}</p>
-                        </div>
-                    </div>
-                    <div class="text-center mt-2">
-                        <a href="details.html?taskId=${task.id}" class="btn btn-primary edit-task-btn">Edit</a>
-                        <button class="btn btn-danger delete-task-btn">Delete</button>
-                    </div>
-                `;
-                taskContainer.appendChild(taskCard);
-            });
-
-            document.querySelectorAll('.delete-task-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const taskId = parseInt(this.closest('.col-md-4').querySelector('.dashboard-card').getAttribute('data-task-id'), 10);
-                    deleteTask(taskId);
-                    alert('Task deleted!');
-                    renderTasks(); // Re-render the tasks after deletion
-                });
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', renderTasks);
-
-        document.querySelector('.add-task-btn').addEventListener('click', function() {
-            window.location.href = 'create.html';
-        });
-    </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task Master</title>
+    <title>Task Master - Home</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Handlee&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -28,34 +28,60 @@
     </nav>
 
     <!-- Jumbotron -->
-    <div class="jumbotron text-center" id="jumbotron">
+    <div id="jumbotron" class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">Welcome to Task Master</h1>
-            <p class="lead">Your Favorite Task Management Application</p>
+            <p class="lead">Your ultimate task management application</p>
         </div>
     </div>
 
-    <!-- Key Features -->
+    <!-- Carousel -->
+    <div class="container my-5">
+        <h2 class="text-center">Featured Tasks</h2>
+        <div id="featuredTasksCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#featuredTasksCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#featuredTasksCarousel" data-slide-to="1"></li>
+                <li data-target="#featuredTasksCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" id="carousel-inner">
+                <!-- Carousel items will be dynamically inserted here -->
+            </div>
+            <a class="carousel-control-prev" href="#featuredTasksCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#featuredTasksCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Cards -->
     <div class="container my-5">
         <div class="row">
             <div class="col-md-4">
-                <div class="card text-center bg-warning square-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Create and edit your own task board!</h5>
+                <div class="card bg-warning">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Create Tasks</h5>
+                        <p class="card-text">Easily add and organize your tasks.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card text-center bg-warning square-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Manage your tasks through the interactive dashboard</h5>
+                <div class="card bg-warning">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Manage Tasks</h5>
+                        <p class="card-text">Keep track of your tasks and deadlines.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card text-center bg-warning square-card">
-                    <div class="card-body">
-                        <h5 class="card-title">Organize your work so that you can live your life</h5>
+                <div class="card bg-warning">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Get Notifications</h5>
+                        <p class="card-text">Receive reminders about your tasks.</p>
                     </div>
                 </div>
             </div>
@@ -65,5 +91,29 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tasks = loadTasks();
+            const carouselInner = document.getElementById('carousel-inner');
+            let isFirst = true;
+
+            tasks.filter(task => task.priority === 'High').forEach(task => {
+                const carouselItem = document.createElement('div');
+                carouselItem.className = `carousel-item${isFirst ? ' active' : ''}`;
+                isFirst = false;
+
+                carouselItem.innerHTML = `
+                    <div class="d-block w-100 carousel-bg">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>${task.title}</h5>
+                            <p>${task.description}</p>
+                        </div>
+                    </div>
+                `;
+                carouselInner.appendChild(carouselItem);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -3,23 +3,23 @@
     --navbar-font-size: 20px;
     --jumbotron-font-size: 45px;
     --card-title-font-size: 45px;
-    --dashboard-card-width: 100%; /* Default width of dashboard cards */
-    --dashboard-card-max-width: 300px; /* Default max width of dashboard cards */
-    --dashboard-card-height: 300px; /* Default height of dashboard cards */
-    --dashboard-card-bg-color: #ffc107; /* Default background color of dashboard cards */
-    --dashboard-card-text-color: #000; /* Default text color of dashboard cards */
-    --label-font-family: 'Quicksand', sans-serif; /* Font family for form labels */
-    --placeholder-font-family: 'Quicksand', sans-serif; /* Font family for form placeholders */
+    --dashboard-card-width: 100%; 
+    --dashboard-card-max-width: 300px; 
+    --dashboard-card-height: 300px; 
+    --dashboard-card-bg-color: #ffc107; 
+    --dashboard-card-text-color: #000; 
+    --label-font-family: 'Quicksand', sans-serif; 
+    --placeholder-font-family: 'Handlee', cursive; 
 }
 
 body {
     font-family: 'Handlee', cursive;
     font-size: var(--body-font-size);
-    background-image: url('paper.jpg'); /* Ensure this path is correct */
+    background-image: url('paper.jpg'); 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Optional: makes the background image fixed */
+    background-attachment: fixed; 
 }
 
 .navbar-brand, .nav-link {
@@ -29,12 +29,12 @@ body {
 
 #jumbotron {
     position: relative;
-    background-image: url('notebook.jpg'); /* Ensure this path is correct */
+    background-image: url('notebook.jpg'); 
     background-size: cover;
     background-position: center;
     color: white;
     text-shadow: 2px 2px 4px #000000;
-    height: 600px; /* Adjust height as needed */
+    height: 600px; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -121,4 +121,29 @@ body {
 /* Placeholder Styling */
 ::placeholder {
     font-family: var(--placeholder-font-family);
+}
+
+/* Carousel Enhancements */
+.carousel-bg {
+    background-color: #b3a98b;
+    height: 175px; 
+    align-items: center;
+    justify-content: center;
+    color: black;
+    padding: 20px;
+}
+
+.carousel-caption {
+    text-align: center;
+    background: rgba(241, 188, 11, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Badge Container */
+.badge-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
 }

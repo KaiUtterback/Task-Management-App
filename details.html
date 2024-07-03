@@ -27,37 +27,37 @@
         </div>
     </nav>
 
-    <!-- Task Details -->
+    <!-- Task Details Form -->
     <div class="container my-5">
         <h1 class="text-center">Task Details</h1>
-        <div class="card mb-4">
-            <div class="card-body">
-                <form id="editTaskForm">
-                    <div class="form-group">
-                        <label for="taskTitle">Task Title</label>
-                        <input type="text" class="form-control" id="taskTitle" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="taskDescription">Description</label>
-                        <textarea class="form-control" id="taskDescription" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="taskDueDate">Due Date</label>
-                        <input type="date" class="form-control" id="taskDueDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="taskPriority">Priority</label>
-                        <select class="form-control" id="taskPriority" required>
-                            <option>High</option>
-                            <option>Medium</option>
-                            <option>Low</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Task</button>
-                    <button type="button" id="deleteTaskBtn" class="btn btn-danger">Delete Task</button>
-                </form>
+        <form id="taskDetailsForm">
+            <div class="form-group">
+                <label for="taskTitle">Task Title</label>
+                <input type="text" class="form-control" id="taskTitle" required>
             </div>
-        </div>
+            <div class="form-group">
+                <label for="taskDescription">Task Description</label>
+                <textarea class="form-control" id="taskDescription" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="taskPriority">Priority</label>
+                <select class="form-control" id="taskPriority" required>
+                    <option>High</option>
+                    <option>Medium</option>
+                    <option>Low</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="taskStatus">Status</label>
+                <select class="form-control" id="taskStatus" required>
+                    <option>To Do</option>
+                    <option>In Progress</option>
+                    <option>Completed</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Task</button>
+            <button type="button" class="btn btn-danger" id="deleteTaskButton">Delete Task</button>
+        </form>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -65,38 +65,36 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="scripts.js"></script>
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        const taskId = parseInt(urlParams.get('taskId'), 10);
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const taskId = parseInt(urlParams.get('taskId'), 10);
+            const tasks = loadTasks();
+            const task = tasks.find(t => t.id === taskId);
 
-        const task = getTaskById(taskId);
+            if (task) {
+                document.getElementById('taskTitle').value = task.title;
+                document.getElementById('taskDescription').value = task.description;
+                document.getElementById('taskPriority').value = task.priority;
+                document.getElementById('taskStatus').value = task.status;
+            }
 
-        if (task) {
-            document.getElementById('taskTitle').value = task.title;
-            document.getElementById('taskDescription').value = task.description;
-            document.getElementById('taskDueDate').value = task.dueDate;
-            document.getElementById('taskPriority').value = task.priority;
-        }
+            document.getElementById('taskDetailsForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                task.title = document.getElementById('taskTitle').value;
+                task.description = document.getElementById('taskDescription').value;
+                task.priority = document.getElementById('taskPriority').value;
+                task.status = document.getElementById('taskStatus').value;
 
-        document.getElementById('editTaskForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            const updatedTask = {
-                id: taskId,
-                title: document.getElementById('taskTitle').value,
-                description: document.getElementById('taskDescription').value,
-                dueDate: document.getElementById('taskDueDate').value,
-                priority: document.getElementById('taskPriority').value
-            };
+                saveTasks(tasks);
+                alert('Task updated!');
+                window.location.href = 'dashboard.html';
+            });
 
-            updateTask(updatedTask);
-            alert('Task saved!');
-            window.location.href = 'dashboard.html';
-        });
-
-        document.getElementById('deleteTaskBtn').addEventListener('click', function() {
-            deleteTask(taskId);
-            alert('Task deleted!');
-            window.location.href = 'dashboard.html';
+            document.getElementById('deleteTaskButton').addEventListener('click', function() {
+                deleteTask(taskId);
+                alert('Task deleted!');
+                window.location.href = 'dashboard.html';
+            });
         });
     </script>
 </body>
