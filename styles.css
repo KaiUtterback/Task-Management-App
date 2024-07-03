@@ -1,0 +1,124 @@
+:root {
+    --body-font-size: 32px;
+    --navbar-font-size: 20px;
+    --jumbotron-font-size: 45px;
+    --card-title-font-size: 45px;
+    --dashboard-card-width: 100%; /* Default width of dashboard cards */
+    --dashboard-card-max-width: 300px; /* Default max width of dashboard cards */
+    --dashboard-card-height: 300px; /* Default height of dashboard cards */
+    --dashboard-card-bg-color: #ffc107; /* Default background color of dashboard cards */
+    --dashboard-card-text-color: #000; /* Default text color of dashboard cards */
+    --label-font-family: 'Quicksand', sans-serif; /* Font family for form labels */
+    --placeholder-font-family: 'Quicksand', sans-serif; /* Font family for form placeholders */
+}
+
+body {
+    font-family: 'Handlee', cursive;
+    font-size: var(--body-font-size);
+    background-image: url('paper.jpg'); /* Ensure this path is correct */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Optional: makes the background image fixed */
+}
+
+.navbar-brand, .nav-link {
+    font-family: 'Quicksand', sans-serif;
+    font-size: var(--navbar-font-size);
+}
+
+#jumbotron {
+    position: relative;
+    background-image: url('notebook.jpg'); /* Ensure this path is correct */
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+    height: 600px; /* Adjust height as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Quicksand', sans-serif;
+    font-size: var(--jumbotron-font-size); 
+}
+
+#jumbotron::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    filter: blur(2px); 
+    z-index: 0;
+}
+
+#jumbotron .container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+}
+
+.card-title {
+    font-family: 'Handlee', cursive; 
+    font-size: var(--card-title-font-size);
+}
+
+.square-card .card-body {
+    height: 300px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0; 
+}
+
+.square-card {
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+}
+
+.dashboard-card {
+    width: var(--dashboard-card-width);
+    max-width: var(--dashboard-card-max-width);
+    height: var(--dashboard-card-height);
+    background-color: var(--dashboard-card-bg-color);
+    color: var(--dashboard-card-text-color);
+}
+
+/* Additional Styles for Sign-Up and Sign-In Pages */
+#signupForm .form-control, #signinForm .form-control {
+    font-size: 1.1em;
+    padding: 10px;
+    font-family: var(--placeholder-font-family);
+}
+
+#signupForm .btn-primary, #signinForm .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    font-size: 1.2em;
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+#signupForm .btn-primary:hover, #signinForm .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+#signupForm .card, #signinForm .card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#signupForm label, #signinForm label {
+    font-family: var(--label-font-family);
+}
+
+/* Placeholder Styling */
+::placeholder {
+    font-family: var(--placeholder-font-family);
+}

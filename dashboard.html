@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Dashboard - Task Master</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Handlee&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">Task Master</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="details.html">Details</a></li>
+                <li class="nav-item"><a class="nav-link" href="create.html">Create</a></li>
+                <li class="nav-item"><a class="nav-link" href="signup.html">Sign Up</a></li>
+                <li class="nav-item"><a class="nav-link" href="signin.html">Sign In</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Dashboard -->
+    <div class="container my-5">
+        <h1 class="text-center">Task Dashboard</h1>
+        <div class="row" id="taskContainer">
+            <!-- Task cards will be dynamically inserted here -->
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <button class="btn btn-success add-task-btn">Add New Task</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+    <script>
+        function renderTasks() {
+            const tasks = loadTasks();
+            const taskContainer = document.getElementById('taskContainer');
+            taskContainer.innerHTML = ''; // Clear existing tasks
+
+            tasks.forEach(task => {
+                const taskCard = document.createElement('div');
+                taskCard.className = 'col-md-4 mb-4';
+                taskCard.innerHTML = `
+                    <div class="card text-center bg-warning dashboard-card" data-task-id="${task.id}">
+                        <div class="card-body">
+                            <h5 class="card-title">${task.title}</h5>
+                            <p class="card-text">${task.description}</p>
+                        </div>
+                    </div>
+                    <div class="text-center mt-2">
+                        <a href="details.html?taskId=${task.id}" class="btn btn-primary edit-task-btn">Edit</a>
+                        <button class="btn btn-danger delete-task-btn">Delete</button>
+                    </div>
+                `;
+                taskContainer.appendChild(taskCard);
+            });
+
+            document.querySelectorAll('.delete-task-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const taskId = parseInt(this.closest('.col-md-4').querySelector('.dashboard-card').getAttribute('data-task-id'), 10);
+                    deleteTask(taskId);
+                    alert('Task deleted!');
+                    renderTasks(); // Re-render the tasks after deletion
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderTasks);
+
+        document.querySelector('.add-task-btn').addEventListener('click', function() {
+            window.location.href = 'create.html';
+        });
+    </script>
+</body>
+</html>
